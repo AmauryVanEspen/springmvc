@@ -13,5 +13,4 @@ import streaming.entity.Genre;
  * @author tom
  */
 public interface GenreCrudService extends CrudRepository<Genre, Long>{
-    
 }
