@@ -32,8 +32,7 @@ public class GenreController {
      */
     @RequestMapping(value = "/ajouter_genre", method = RequestMethod.GET)
     public String ajouterGenre (Model m){
-        Genre genre = new Genre();
-        m.addAttribute("genreNom", genre);
+        m.addAttribute("genreNom", new Genre());
         
         return "ajouter_genre.jsp";
     }

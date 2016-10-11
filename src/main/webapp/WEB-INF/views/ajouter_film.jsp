@@ -20,13 +20,34 @@
             <c:set var="route">
                 <spring:url value="/ajouter_film"/>
             </c:set>
-            <form:form action="${route}" modelAttribute="filmTitre">
-                <form:hidden path="id"/>
-                <label>Titre du Film</label>
-                <form:input path="titre"/>
-                <br>
-                <input type="submit" value="Ajouter"/>
-            </form:form>
+            <table>
+                <form:form action="${route}" modelAttribute="filmTitre">
+                    <form:hidden path="id"/>
+                    <tr>
+                        <td>
+                            <label>Titre du Film</label><br>
+                            <form:input path="titre"/>
+                        </td>
+                        <td>
+                            <label>Genre du Film</label><br>
+                            <form:select path="genre.id"><form:options items="${genres}" itemLabel="nom" itemValue="id"></form:options></form:select>
+                                </td>
+                                <td>
+                                    <label>Année de production du Film</label><br>
+                            <form:input path="anneeProd"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Synopsis du Film</label><br>
+                            <form:textarea path="synopsis"/>
+                        </td>
+                        <td>
+                            <input type="submit" value="Ajouter"/>
+                        </td>
+                    </tr>
+                </form:form>
+            </table>
         </div>
     </body>
 </html>

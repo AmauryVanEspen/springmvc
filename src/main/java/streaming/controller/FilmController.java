@@ -12,34 +12,36 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import streaming.entity.Film;
 import streaming.service.FilmCrudService;
+import streaming.service.GenreCrudService;
 
 /**
  *
  * @author tom
  */
 @Controller
-@RequestMapping("/film")
+//@RequestMapping("/film")
 public class FilmController {
     
     @Autowired
     private FilmCrudService serviceFilm;
+    @Autowired
+    private GenreCrudService serviceGenre;
     
-    @RequestMapping(value="find/{id}", method = RequestMethod.GET)
-    @ResponseBody
-    public Film findById( @PathVariable("id") long id){
-        
-        Film f = new Film(1L, "Karate Kid", "blabla", 1989L, null);
-        
-        return f;
-    }
+//    @RequestMapping(value="find/{id}", method = RequestMethod.GET)
+//    @ResponseBody
+//    public Film findById( @PathVariable("id") long id){
+//        
+//        Film f = new Film(1L, "Karate Kid", "blabla", 1989L, null);
+//        
+//        return f;
+//    }
     
     @RequestMapping(value = "/ajouter_film", method = RequestMethod.GET)
     public String ajouterFilm (Model m){
-        Film film = new Film();
-        m.addAttribute("FilmTitre", film);
+        m.addAttribute("filmTitre", new Film());
+        m.addAttribute("genres", serviceGenre.findAll());
         
         return "ajouter_film.jsp";
     }
@@ -53,6 +55,7 @@ public class FilmController {
     @RequestMapping(value = "/modifier_film/{val}", method = RequestMethod.GET)
     public String modifier (@PathVariable("val") long idFilmAModifier, Model m){
         Film film = serviceFilm.findOne(idFilmAModifier);
+        m.addAttribute("genres", serviceGenre.findAll());
         
         m.addAttribute("filmAct", film);
         return "modifier_film.jsp";
@@ -74,7 +77,7 @@ public class FilmController {
     public String lister(Model m) {
         m.addAttribute("titre", "Liste des films");
         m.addAttribute("films", serviceFilm.findAll());
-
+        m.addAttribute("genre", serviceGenre.findAll());
         return "film_lister.jsp";
     }
     

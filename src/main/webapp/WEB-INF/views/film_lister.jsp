@@ -14,10 +14,17 @@
     </head>
     <body>
         <h1>Films disponibles</h1>
+    <table>
         <c:forEach items="${films}" var="film">
-            ${film.id} - ${film.titre} 
-            <a href="supprimer_film/${film.id}">Supprimer</a>
-            <a href="modifier_film/${film.id}">Modifier</a><br>
-        </c:forEach>
-    </body>
+            <tr>
+                <td>${film.titre}</td>
+                <td><a href="supprimer_film/${film.id}">Supprimer</a></td>
+                <td><a href="modifier_film/${film.id}">Modifier</a></td>
+            </tr>
+            <tr>
+                <td> ${film.anneeProd} </td><td> ${film.genre.nom} </td><td> ${film.synopsis}</td>
+            </tr>
+    </c:forEach>
+</table>
+</body>
 </html>
